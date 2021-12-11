@@ -36,7 +36,7 @@ function App() {
                         }}
                     >
                         <Switch>
-                            <Route path="/" component={ExchangeList} />
+                            <Route exact path="/" component={ExchangeList} />
                             <Route
                                 path="/btc-treasury"
                                 component={BtcTreasury}
