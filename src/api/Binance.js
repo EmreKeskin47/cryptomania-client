@@ -1,5 +1,5 @@
 import axios from "axios";
-import API_URL from "./ApiUrl";
+import API_URL from "./apiUrl";
 
 export async function getPriceOfCoin(ticker) {
     const response = await axios.get(`${API_URL}/binance/price/${ticker}`);
