@@ -41,8 +41,7 @@ const EthTreasury = () => {
         <Grid item sm={12} justifyContent={"center"}>
             <Title
                 h1="ETHEREUM TREASURY"
-                h2="Public companies' ethereum holdings (Ordered by total
-                        holdings descending)"
+                h2="Public companies' ethereum holdings @Coingecko"
             ></Title>
 
             <Container sx={{ mt: 4, mb: 4 }}>

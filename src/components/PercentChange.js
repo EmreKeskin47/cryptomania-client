@@ -17,13 +17,23 @@ const PercentChange = (props) => {
             }}
         >
             {change >= 0 ? (
-                <ArrowDropUpIcon sx={{ fontSize: "22px", color: textColor }} />
+                <ArrowDropUpIcon
+                    sx={{
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        color: textColor,
+                    }}
+                />
             ) : (
                 <ArrowDropDownIcon
-                    sx={{ fontSize: "22px", color: textColor }}
+                    sx={{
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        color: textColor,
+                    }}
                 />
             )}
-            <Typography variant="body2" color={textColor}>
+            <Typography variant="h7" color={textColor}>
                 {decimalTrim ? change.toFixed(2) : change}%
             </Typography>
         </Box>

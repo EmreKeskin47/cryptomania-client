@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getNewsCoinmarketCal } from "../api/Coindar";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Title from "../components/Title";
 import SmallEventCard from "../components/EventCard";
 import { coindarCoinList } from "../api/CoindarCoinList";
@@ -40,8 +40,12 @@ const CoinMarketCalEventsPage = () => {
             <Grid item sm={12}>
                 <Title
                     h1="CoinMarketCal Events"
-                    h2="Upcoming Crytocurrency Events, mostly 7 days, fetched from CoinMarketCal API"
+                    h2="Upcoming Crytocurrency Events, mostly 7 days"
                 ></Title>
+                <Typography variant="body1" gutterBottom>
+                    Active categories General - Brand - Exchange -Hard fork -
+                    ICO - Partnership - Swap - Update - Report - NFT
+                </Typography>
                 <ToggleButtonGroup
                     color="primary"
                     value={filter}
@@ -50,7 +54,6 @@ const CoinMarketCalEventsPage = () => {
                     sx={{ marginTop: 2 }}
                 >
                     <ToggleButton value="binance">Binance</ToggleButton>
-                    <ToggleButton value=" ">Both</ToggleButton>
                     <ToggleButton value="gate">Gate</ToggleButton>
                 </ToggleButtonGroup>
             </Grid>
@@ -62,7 +65,6 @@ const CoinMarketCalEventsPage = () => {
                         );
                         if (
                             (filter === "binance" && binance === true) ||
-                            filter === " " ||
                             (filter === "gate" && gate === true)
                         ) {
                             return (

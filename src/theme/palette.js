@@ -31,7 +31,7 @@ const GREY = {
 const PRIMARY = {
     lighter: "#C8FACD",
     light: "#5BE584",
-    main: "rgba(0, 143, 251, 0.85)",
+    main: "#22a9e3",
     dark: "#007B55",
     darker: "#005249",
     contrastText: "#fff",

@@ -1,11 +1,8 @@
 import { merge } from "lodash";
 import ReactApexChart from "react-apexcharts";
-// material
 import { useTheme, styled } from "@mui/material/styles";
 import { Card, CardHeader, Grid, Paper, Typography } from "@mui/material";
-// utils
 import { fNumber } from "../utils/formatNumber";
-//
 import { BaseOptionChart } from "../components/charts";
 import { useEffect, useState } from "react";
 import { getBtcDominance } from "../api/Coingecko";
@@ -15,8 +12,6 @@ import Chart from "react-apexcharts";
 import NumberFormat from "react-number-format";
 import PercentChange from "../components/PercentChange";
 import { Box } from "@mui/system";
-
-// ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 300;
 const LEGEND_HEIGHT = 47;
@@ -48,11 +43,19 @@ export default function AppCurrentVisits() {
     const [marketChange, setMarketChange] = useState(0);
     const [ethChange, setEthChange] = useState(0);
     const [btcChange, setBtcChange] = useState(0);
+    const [activeCurrency, setActiveCurrency] = useState(0);
+    const [activeExchange, setActiveExchange] = useState(0);
+    const [cmcBtcDom, setCmcBtcDom] = useState(0);
+    const [cmcBtcDomChange, setCmcBtcDomChange] = useState(0);
 
     const theme = useTheme();
 
     const getDomData = async () => {
         const res = await getGlobalInfo();
+        setActiveCurrency(res.data.active_cryptocurrencies);
+        setActiveExchange(res.data.active_exchanges);
+        setCmcBtcDom(res.data.btc_dominance);
+        setCmcBtcDomChange(res.data.btc_dominance_24h_percentage_change);
         let ethCap =
             (res.data.quote.USD.total_market_cap * res.data.eth_dominance) /
             100;
@@ -110,33 +113,10 @@ export default function AppCurrentVisits() {
                 formatter: function (val) {
                     return val + "%";
                 },
-                offsetY: -10,
-                style: {
-                    fontSize: "0.6rem",
-                    colors: ["#fff"],
-                },
+                offsetY: -20,
             },
             xaxis: {
                 categories: domTop10,
-                labels: {
-                    style: {
-                        colors: [
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                        ],
-                        fontSize: "12px",
-                        fontWeight: 400,
-                    },
-                },
-
                 crosshairs: {
                     fill: {
                         type: "gradient",
@@ -150,15 +130,11 @@ export default function AppCurrentVisits() {
                     },
                 },
             },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: ["#fff", "#fff", "#fff"],
-                        fontSize: "12px",
-                        fontWeight: 400,
-                    },
-                },
+
+            theme: {
+                mode: "dark",
             },
+            colors: [theme.palette.primary.main],
         },
         series: [
             {
@@ -195,17 +171,17 @@ export default function AppCurrentVisits() {
 
     return (
         <Grid container justifyContent={"center"}>
-            <Title h1="Market Data" />
+            <Title h1="Market Overview" />
             <Grid container justifyContent={"center"} marginY={5}>
-                <Grid item xs={10} lg={3} margin={3} j>
+                <Grid item xs={10} lg={3} margin={3} rowSpacing={2}>
                     <Card>
                         <Paper
                             sx={{
-                                marginTop: 3,
+                                marginTop: 1,
                                 p: 2,
                                 display: "flex",
                                 flexDirection: "column",
-                                height: 150,
+                                height: 100,
                             }}
                         >
                             <Typography
@@ -239,17 +215,48 @@ export default function AppCurrentVisits() {
                             </Typography>
                         </Paper>
                     </Card>
+                    <Card sx={{ marginTop: 6 }}>
+                        <Paper
+                            sx={{
+                                marginTop: 1,
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                                height: 100,
+                            }}
+                        >
+                            <Typography
+                                component="h2"
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    Active Cryptocurrencies
+                                </Box>
+                            </Typography>
+
+                            <Typography component="p" variant="h5">
+                                {activeCurrency}
+                            </Typography>
+                        </Paper>
+                    </Card>
                 </Grid>
 
                 <Grid item xs={10} lg={3} margin={3}>
                     <Card>
                         <Paper
                             sx={{
-                                marginTop: 3,
+                                marginTop: 1,
                                 p: 2,
                                 display: "flex",
                                 flexDirection: "column",
-                                height: 150,
+                                height: 100,
                             }}
                         >
                             <Typography
@@ -283,17 +290,48 @@ export default function AppCurrentVisits() {
                             </Typography>
                         </Paper>
                     </Card>
+                    <Card sx={{ marginTop: 6 }}>
+                        <Paper
+                            sx={{
+                                marginTop: 1,
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                                height: 100,
+                            }}
+                        >
+                            <Typography
+                                component="h2"
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    Active Exchanges
+                                </Box>
+                            </Typography>
+
+                            <Typography component="p" variant="h5">
+                                {activeExchange}
+                            </Typography>
+                        </Paper>
+                    </Card>
                 </Grid>
 
                 <Grid item xs={10} lg={3} margin={3}>
                     <Card>
                         <Paper
                             sx={{
-                                marginTop: 3,
+                                marginTop: 1,
                                 p: 2,
                                 display: "flex",
                                 flexDirection: "column",
-                                height: 150,
+                                height: 100,
                             }}
                         >
                             <Typography
@@ -327,6 +365,47 @@ export default function AppCurrentVisits() {
                             </Typography>
                         </Paper>
                     </Card>
+                    <Card sx={{ marginTop: 6 }}>
+                        <Paper
+                            sx={{
+                                marginTop: 1,
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                                height: 100,
+                            }}
+                        >
+                            <Typography
+                                component="h2"
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    {"Bitcoin Dominance"}
+                                    <PercentChange
+                                        change={cmcBtcDomChange}
+                                        decimalTrim={true}
+                                    />
+                                </Box>
+                            </Typography>
+
+                            <Typography component="p" variant="h5">
+                                <NumberFormat
+                                    value={cmcBtcDom}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    decimalScale={2}
+                                    prefix={"%"}
+                                />
+                            </Typography>
+                        </Paper>
+                    </Card>
                 </Grid>
             </Grid>
             <Grid
@@ -339,7 +418,7 @@ export default function AppCurrentVisits() {
                     <Card>
                         <CardHeader
                             title="Top 10 Coin Dominance"
-                            subheader="updated today, data from Coingecko"
+                            subheader="updated today, @Coingecko"
                         />
                         <Chart
                             options={CHART_DATA_3.options}

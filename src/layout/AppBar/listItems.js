@@ -14,20 +14,39 @@ import CoinmarketCal from "../../assets/icon/coinmarketcal.png";
 import Ethereum from "../../assets/icon/ethereum.png";
 import Bitcoin from "../../assets/icon/bitcoin.png";
 import FearGreed from "../../assets/icon/fearGreed.png";
+import Binance from "../../assets/icon/binance-drawer-icon.png";
+import WhaleAlert from "../../assets/icon/whale-alert-icon.png";
+import Cryptogram from "../../assets/small-icon.png";
 
 export const mainListItems = (
-    <List sx={{ marginTop: 5, marginBottom: 20 }}>
+    <List sx={{ marginBottom: 8 }}>
         <Link href="/" underline="none" color="text.primary">
             <ListItem>
                 <ListItemIcon>
                     <Home
                         sx={{
-                            width: "50px",
-                            height: "50px",
+                            width: "35px",
+                            height: "40px",
                         }}
                     />
                 </ListItemIcon>
                 <ListItemText primary="Home" />
+            </ListItem>
+        </Link>
+        <Link href="/exchanges" underline="none" color="text.primary">
+            <ListItem>
+                <img
+                    src={Binance}
+                    style={{
+                        width: "35px",
+                        height: "35px",
+                    }}
+                    alt="FearGreed"
+                />
+                <ListItemText
+                    sx={{ marginLeft: "20px" }}
+                    primary="Exchange List "
+                />
             </ListItem>
         </Link>
 
@@ -36,14 +55,14 @@ export const mainListItems = (
                 <img
                     src={CoinmarketCap}
                     style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "35px",
+                        height: "35px",
                     }}
                     alt="FearGreed"
                 />
                 <ListItemText
                     sx={{ marginLeft: "20px" }}
-                    primary="BTC Dominance"
+                    primary="Market Overview"
                 />
             </ListItem>
         </Link>
@@ -53,8 +72,8 @@ export const mainListItems = (
                 <img
                     src={FearGreed}
                     style={{
-                        width: "50px",
-                        height: "40px",
+                        width: "35px",
+                        height: "30px",
                     }}
                     alt="FearGreed"
                 />
@@ -74,14 +93,14 @@ export const mainListItems = (
                 <img
                     src={CoinmarketCal}
                     style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "35px",
+                        height: "35px",
                     }}
                     alt="Coinmarketcal"
                 />
                 <ListItemText
                     sx={{ marginLeft: "20px" }}
-                    primary="CoinMarketCal"
+                    primary="CoinMarketCal Events"
                 />
             </ListItem>
         </Link>
@@ -91,12 +110,15 @@ export const mainListItems = (
                 <img
                     src={Coindar}
                     style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "35px",
+                        height: "35px",
                     }}
-                    alt="Coindar"
+                    alt="Coindar "
                 />
-                <ListItemText sx={{ marginLeft: "20px" }} primary="Coindar" />
+                <ListItemText
+                    sx={{ marginLeft: "20px" }}
+                    primary="Coindar  Events"
+                />
             </ListItem>
         </Link>
 
@@ -105,14 +127,14 @@ export const mainListItems = (
                 <img
                     src={Coingecko}
                     style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "30px",
+                        height: "30px",
                         marginLeft: "5px",
                     }}
                     alt="Coingecko"
                 />
                 <ListItemText
-                    sx={{ marginLeft: "25px" }}
+                    sx={{ marginLeft: "20px" }}
                     primary="Trending Coins "
                 />
             </ListItem>
@@ -123,13 +145,13 @@ export const mainListItems = (
                 <img
                     src={Bitcoin}
                     style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "40px",
+                        height: "40px",
                     }}
                     alt="Bitcoin"
                 />
                 <ListItemText
-                    sx={{ marginLeft: "20px" }}
+                    sx={{ marginLeft: "15px" }}
                     primary="Bitcoin Treasury"
                 />
             </ListItem>
@@ -140,14 +162,49 @@ export const mainListItems = (
                 <img
                     src={Ethereum}
                     style={{
-                        width: "50px",
-                        height: "45px",
+                        width: "40px",
+                        height: "35px",
                     }}
                     alt="Ethereum"
                 />
                 <ListItemText
-                    sx={{ marginLeft: "20px" }}
+                    sx={{ marginLeft: "15px" }}
                     primary="Ethereum Treasury"
+                />
+            </ListItem>
+        </Link>
+        <Link href="/whale-alert" underline="none" color="text.primary">
+            <ListItem>
+                <img
+                    src={WhaleAlert}
+                    style={{
+                        width: "30px",
+                        height: "30px",
+                        marginLeft: "7px",
+                    }}
+                    alt="Ethereum"
+                />
+                <ListItemText
+                    sx={{ marginLeft: "18px" }}
+                    primary="Whale Alert"
+                />
+            </ListItem>
+        </Link>
+        <Link href="/auto-margin" underline="none" color="text.primary">
+            <ListItem>
+                <img
+                    src={Cryptogram}
+                    style={{
+                        width: "64px",
+                        height: "55px",
+                        marginLeft: "-10px",
+                        marginTop: "-10px",
+                    }}
+                    alt="Cryptogram"
+                />
+                <ListItemText
+                    sx={{ marginTop: "-10px" }}
+                    primary="Automated Margin"
                 />
             </ListItem>
         </Link>
@@ -157,6 +214,31 @@ export const mainListItems = (
 export const secondaryListItems = (
     <List>
         <ListSubheader inset>Upcoming features</ListSubheader>
+        <Link underline="none" color="text.primary">
+            <ListItem button>
+                <ListItemIcon>
+                    <AssignmentIcon
+                        sx={{
+                            marginRight: "15px !important",
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="Detailed Indicator Signals" />
+            </ListItem>
+        </Link>
+
+        <Link underline="none" color="text.primary">
+            <ListItem button>
+                <ListItemIcon>
+                    <AssignmentIcon
+                        sx={{
+                            marginRight: "15px !important",
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="Whale Movement Analysis" />
+            </ListItem>
+        </Link>
 
         <Link href="/pricing" underline="none" color="text.primary">
             <ListItem button>
@@ -180,30 +262,6 @@ export const secondaryListItems = (
                     />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
-            </ListItem>
-        </Link>
-        <Link href="/whale-alert" underline="none" color="text.primary">
-            <ListItem button>
-                <ListItemIcon>
-                    <AssignmentIcon
-                        sx={{
-                            marginRight: "15px !important",
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Whale Alert" />
-            </ListItem>
-        </Link>
-        <Link href="/auto-marjin" underline="none" color="text.primary">
-            <ListItem button>
-                <ListItemIcon>
-                    <AssignmentIcon
-                        sx={{
-                            marginRight: "15px !important",
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Automated Margin" />
             </ListItem>
         </Link>
     </List>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -13,13 +13,15 @@ import Gate from "../assets/icon/gate-icon.png";
 import Modal from "@mui/material/Modal";
 import Moment from "react-moment";
 import PercentChange from "./PercentChange";
+import Link from "@mui/material/Link";
+import { getRSIBinance } from "../api/Finnhub";
 
 const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "80%",
+    width: "60%",
     height: "60%",
     bgcolor: "background.paper",
     border: "2px solid #000",
@@ -28,10 +30,6 @@ const style = {
 };
 
 const SmallEventCard = (props) => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
     const {
         symbol,
         latest,
@@ -47,9 +45,23 @@ const SmallEventCard = (props) => {
         dateAdded,
         priceChange,
     } = props;
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [rsi, setRsi] = useState([]);
+
+    useEffect(() => {
+        async function getIndicatorData() {
+            const res = await getRSIBinance(symbol);
+            if (res.s === "ok") {
+                setRsi(res.rsi);
+            }
+        }
+        getIndicatorData();
+    }, [symbol]);
 
     return (
-        <Grid item xs={11} md={5.5} lg={3.5} xl={2.5} justifySelf={"center"}>
+        <Grid item xs={10} md={5.5} lg={3.5} xl={2.5} justifySelf={"center"}>
             <Card sx={{ maxWidth: 400, height: "100%" }}>
                 <CardHeader
                     avatar={
@@ -77,12 +89,59 @@ const SmallEventCard = (props) => {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <img
-                            src={proof}
-                            alt={
-                                "proof img not available, event from: " + source
-                            }
-                        />
+                        {proof ? (
+                            <img
+                                style={{ maxHeight: "100%", width: "100%" }}
+                                src={proof}
+                                alt="proof img not available"
+                            />
+                        ) : (
+                            <Box>
+                                {source && (
+                                    <Link
+                                        href={source}
+                                        color="text.primary"
+                                        sx={{
+                                            textDecoration: "none",
+                                            fontWeight: "bold",
+                                            fontSize: "1rem",
+                                        }}
+                                    >
+                                        View Event Source
+                                    </Link>
+                                )}
+                                {rsi && rsi.length > 0 ? (
+                                    <Grid item>
+                                        <Typography variant="h3">
+                                            {symbol}
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            Daily RSI for last 14 days
+                                        </Typography>
+                                        <Grid item xs={12}>
+                                            <ul>
+                                                {rsi.map((item, id) => (
+                                                    <Typography
+                                                        key={id}
+                                                        variant="subtitle1"
+                                                        color="text.secondary"
+                                                    >
+                                                        {item}
+                                                    </Typography>
+                                                ))}
+                                            </ul>
+                                        </Grid>
+                                    </Grid>
+                                ) : (
+                                    <Typography
+                                        variant="h6"
+                                        color="text.primary"
+                                    >
+                                        {"RSI not available for " + symbol}
+                                    </Typography>
+                                )}
+                            </Box>
+                        )}
                     </Box>
                 </Modal>
 

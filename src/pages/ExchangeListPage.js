@@ -23,12 +23,18 @@ const ExchangeListPage = () => {
     return (
         <Grid item sm={12} justifyContent={"center"} justifySelf={"center"}>
             <Title
-                h1="List of Exchanges"
-                h2="Exchange infos fetched from CoinmarketCap API"
+                h1="List of Supported Exchanges"
+                h2="Exchange info @CoinmarketCap"
             />
             <Container sx={{ py: 4 }} maxWidth="md">
                 {/* End hero unit */}
-                <Grid container spacing={4}>
+                <Grid
+                    container
+                    spacing={4}
+                    justifyContent={"center"}
+                    justifySelf={"center"}
+                    justifyItems={"center"}
+                >
                     {exchangeCards.map((card) => (
                         <Grid item key={card.id} xs={12} sm={6} md={4}>
                             <Card

@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getFearGreed } from "../api/feargreed";
+import { getFearGreed } from "../api/Feargreed";
 import Title from "../components/Title";
 import ReactSpeedometer from "react-d3-speedometer";
 
@@ -79,23 +79,23 @@ const FearGreedPage = () => {
         <Box justifyContent={"center"}>
             <Title
                 h1="FEAR GREED INDEX"
-                h2={"Last Update " + dateUpdated.substring(0, 10)}
+                h2={
+                    "Last Update " +
+                    dateUpdated.substring(0, 10) +
+                    "@FearGreedAPI"
+                }
             ></Title>
 
             <Grid container spacing={2} justifyContent={"center"}>
                 <Grid item xs={12} marginTop={3}>
-                    <Typography
-                        variant="h4"
-                        marginBottom={5}
-                        color="text.secondary"
-                    >
+                    <Typography variant="h4" marginBottom={5}>
                         Today
                     </Typography>
-                    {prev && (
+                    {now && (
                         <CustomSpeedometer
                             width={300}
-                            value={prev.value}
-                            title={prev.valueText}
+                            value={now.value}
+                            title={now.valueText}
                         />
                     )}
                 </Grid>
@@ -104,11 +104,11 @@ const FearGreedPage = () => {
                     <Typography variant="h4" marginBottom={5}>
                         Yesterday
                     </Typography>
-                    {now && (
+                    {prev && (
                         <CustomSpeedometer
-                            width={250}
-                            value={now.value}
-                            title={now.valueText}
+                            width={300}
+                            value={prev.value}
+                            title={prev.valueText}
                         />
                     )}
                 </Grid>

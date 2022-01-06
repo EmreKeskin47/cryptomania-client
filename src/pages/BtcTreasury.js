@@ -41,8 +41,7 @@ const BtcTreasury = () => {
         <Grid item sm={12} justifyContent={"center"}>
             <Title
                 h1="BTC TREASURY"
-                h2="Public companies' bitcoin holdings (Ordered by total
-                        holdings descending)"
+                h2="Public companies' bitcoin holdings @Coingecko"
             ></Title>
 
             <Container

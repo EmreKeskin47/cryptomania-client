@@ -15,6 +15,9 @@ import "./App.css";
 import Trending from "./pages/Trending";
 import CoinMarketCalEventsPage from "./pages/CoinMarketCalEvents";
 import CoindarEvents from "./pages/CoindarEvents";
+import HomePage from "./pages/Home";
+import WhaleAlertPage from "./pages/WhaleAlert";
+import AutoMarginPage from "./pages/AutoMargin";
 
 function App() {
     return (
@@ -27,16 +30,18 @@ function App() {
                     <Box
                         component="main"
                         sx={{
-                            backgroundColor: (theme) =>
-                                theme.palette.background.default,
-                            flexGrow: 1,
-                            height: "100vh",
-                            overflow: "auto",
+                            ml: { sm: `${240}px` },
+                            width: "100%",
                             marginTop: 10,
                         }}
                     >
                         <Switch>
-                            <Route exact path="/" component={ExchangeList} />
+                            <Route exact path="/" component={HomePage} />
+                            <Route
+                                exact
+                                path="/exchanges"
+                                component={ExchangeList}
+                            />
                             <Route
                                 path="/btc-treasury"
                                 component={BtcTreasury}
@@ -54,12 +59,20 @@ function App() {
                             <Route path="/trending" component={Trending} />
                             <Route path="/pricing" component={Pricing} />
                             <Route
+                                path="/whale-alert"
+                                component={WhaleAlertPage}
+                            />
+                            <Route
                                 path="/coinmarketcal-events"
                                 component={CoinMarketCalEventsPage}
                             />
                             <Route
                                 path="/coindar-events"
                                 component={CoindarEvents}
+                            />
+                            <Route
+                                path="/auto-margin"
+                                component={AutoMarginPage}
                             />
                         </Switch>
                     </Box>

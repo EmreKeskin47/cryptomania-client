@@ -1,5 +1,5 @@
 import axios from "axios";
-import API_URL from "./apiUrl";
+import API_URL from "./ApiUrl";
 
 export async function getBtcTreasury() {
     const response = await axios.get(`${API_URL}/coingecko/company_btc`);

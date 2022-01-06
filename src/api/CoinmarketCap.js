@@ -5,7 +5,7 @@ import BtcTurk from "../assets/btcturk.png";
 import Houbi from "../assets/huobi.webp";
 import Kucoin from "../assets/kucoin.jpg";
 import axios from "axios";
-import API_URL from "./apiUrl";
+import API_URL from "./ApiUrl";
 
 export async function getExchangeList() {
     var binance = await getExchangeInfo(270);

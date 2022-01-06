@@ -10,7 +10,6 @@ const TrendingPage = () => {
 
     const getTrendingList = async () => {
         const res = await getTrendingCoins();
-        console.log(res.coins);
         setTrending(res.coins);
     };
     useEffect(() => {
@@ -35,7 +34,7 @@ const TrendingPage = () => {
             <Grid item xs={12}>
                 <Title
                     h1="Trending Coins"
-                    h2="Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)"
+                    h2="Top-7 trending coins on CoinGecko as searched by users in the last 24 hours"
                 ></Title>
             </Grid>
             {trending &&
@@ -46,6 +45,7 @@ const TrendingPage = () => {
                     );
                     return (
                         <SmallEventCard
+                            key={id}
                             symbol={coin.item.symbol}
                             name={coin.item.name}
                             img={coin.item.large}
@@ -55,7 +55,6 @@ const TrendingPage = () => {
                             }
                             gate={gate}
                             binance={binance}
-                            key={id}
                         />
                     );
                 })}

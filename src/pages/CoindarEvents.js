@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getNewsCoindar } from "../api/Coindar";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Title from "../components/Title";
 import { coindarCoinList } from "../api/CoindarCoinList";
 import SmallEventCard from "../components/EventCard";
@@ -12,11 +12,15 @@ const CoindarEvents = () => {
     const [newsList, setNewsList] = useState([]);
     const [filter, setFilter] = useState("binance");
 
-    const getNewsData = async (page, sort) => {
-        const res = await getNewsCoindar(page, sort);
-        setNewsList(res);
-    };
     useEffect(() => {
+        async function getNewsData(page, sort) {
+            const res = await getNewsCoindar(page, sort);
+            if (newsList === []) {
+                setNewsList(res);
+            } else {
+                setNewsList([...newsList, ...res]);
+            }
+        }
         getNewsData(1, "date_start");
     }, []);
 
@@ -51,8 +55,12 @@ const CoindarEvents = () => {
             <Grid item sm={12}>
                 <Title
                     h1="Coindar News"
-                    h2="Upcoming Crytocurrency Events fetched from Coindar API"
+                    h2="Upcoming Crytocurrency Events @Coindar "
                 ></Title>
+                <Typography variant="body1" gutterBottom>
+                    Active categories General - Brand - Exchange -Hard fork -
+                    ICO - Partnership - Swap - Update - Report - NFT
+                </Typography>
                 <ToggleButtonGroup
                     color="primary"
                     value={filter}
@@ -61,7 +69,6 @@ const CoindarEvents = () => {
                     sx={{ marginTop: 2 }}
                 >
                     <ToggleButton value="binance">Binance</ToggleButton>
-                    <ToggleButton value=" ">Both</ToggleButton>
                     <ToggleButton value="gate">Gate</ToggleButton>
                 </ToggleButtonGroup>
             </Grid>
@@ -74,7 +81,6 @@ const CoindarEvents = () => {
                             getCoinDetailedInfo(coin.coin_id);
                         if (
                             (filter === "binance" && binance === true) ||
-                            filter === " " ||
                             (filter === "gate" && gate === true)
                         ) {
                             return (
@@ -91,9 +97,8 @@ const CoindarEvents = () => {
                                     gate={gate}
                                     binance={binance}
                                     key={id}
-                                    latest={coin.date_start.length < 8}
+                                    latest={coin.date_start.length < 7}
                                     source={coin.source}
-                                    proof={coin.source}
                                     dateAdded={coin.date_public}
                                     priceChange={coin.coin_price_changes}
                                 />
