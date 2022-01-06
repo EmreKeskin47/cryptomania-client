@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getFearGreed } from "../api/Feargreed";
+import { getFearGreed } from "../api/feargreed";
 import Title from "../components/Title";
 import ReactSpeedometer from "react-d3-speedometer";
 
