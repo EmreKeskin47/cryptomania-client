@@ -25,13 +25,13 @@ export const mainListItems = (
                 <img
                     src={CryptogramHome}
                     style={{
-                        width: "55px",
+                        width: "45px",
                         height: "45px",
-                        marginLeft: "-10px",
+                        marginLeft: "-5px",
                     }}
                     alt="Cryptogram"
                 />
-                <ListItemText sx={{ marginLeft: "10px" }} primary="Home " />
+                <ListItemText sx={{ marginLeft: "15px" }} primary="Home " />
             </ListItem>
         </Link>
         <Link href="/exchanges" underline="none" color="text.primary">

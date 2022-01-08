@@ -37,14 +37,14 @@ const CoinMarketCalEventsPage = () => {
     };
     return (
         <Grid container marginBottom={10} spacing={5} justifyContent={"center"}>
-            <Grid item sm={12}>
+            <Grid item xs={11}>
                 <Title
                     h1="CoinMarketCal Events"
-                    h2="Upcoming Crytocurrency Events, mostly 7 days"
+                    h2="Upcoming Crytocurrency Events, mostly 7 days @CoinMarketCal"
                 ></Title>
-                <Typography variant="body1" gutterBottom>
-                    Active categories General - Brand - Exchange -Hard fork -
-                    ICO - Partnership - Swap - Update - Report - NFT
+                <Typography variant="body2" gutterBottom marginTop={2}>
+                    Active categories are General - Brand - Exchange -Hard fork
+                    - ICO - Partnership - Swap - Update - Report - NFT
                 </Typography>
                 <ToggleButtonGroup
                     color="primary"

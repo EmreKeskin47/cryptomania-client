@@ -34,7 +34,7 @@ const TrendingPage = () => {
             <Grid item xs={12}>
                 <Title
                     h1="Trending Coins"
-                    h2="Top-7 trending coins on CoinGecko as searched by users in the last 24 hours"
+                    h2="Top-7 trending coins on CoinGecko as searched by users in the last 24 hours @CoinGecko"
                 ></Title>
             </Grid>
             {trending &&

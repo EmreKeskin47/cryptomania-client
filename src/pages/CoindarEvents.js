@@ -17,10 +17,13 @@ const CoindarEvents = () => {
 
     useEffect(() => {
         async function getNewsData(page, sort) {
-            const res = await getNewsCoindar(page, sort);
-            setNewsList(res);
+            const res1 = await getNewsCoindar(page, sort);
+            const res2 = await getNewsCoindar(page + 1, sort);
+
+            setNewsList(res1.concat(res2));
         }
         getNewsData(1, "date_start");
+
         setLoading(false);
     }, []);
 
@@ -55,12 +58,12 @@ const CoindarEvents = () => {
                 justifySelf={"center"}
                 justifyItems={"center"}
             >
-                <Grid item sm={12}>
+                <Grid item xs={11}>
                     <Title
                         h1="Coindar News"
                         h2="Upcoming Crytocurrency Events @Coindar "
                     ></Title>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography variant="body2" gutterBottom marginTop={2}>
                         Active categories General - Brand - Exchange -Hard fork
                         - ICO - Partnership - Swap - Update - Report - NFT
                     </Typography>
@@ -92,7 +95,7 @@ const CoindarEvents = () => {
                                         name={name}
                                         img={img}
                                         date={
-                                            coin.date_start.length > 7
+                                            coin.date_start.length >= 7
                                                 ? coin.date_start
                                                 : coin.date_start + "-30"
                                         }
@@ -104,6 +107,7 @@ const CoindarEvents = () => {
                                         source={coin.source}
                                         dateAdded={coin.date_public}
                                         priceChange={coin.coin_price_changes}
+                                        coindar={true}
                                     />
                                 );
                             } else {

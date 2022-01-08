@@ -45,12 +45,17 @@ const SmallEventCard = (props) => {
         text,
         dateAdded,
         priceChange,
+        coindar,
     } = props;
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [rsi, setRsi] = useState([]);
+    console.log("-----------------------------");
+
+    console.log(date, "not valid içi");
+    console.log("-----------------------------");
 
     function isValidDate(d) {
         return d instanceof Date && !isNaN(d);
@@ -99,7 +104,9 @@ const SmallEventCard = (props) => {
         getIndicatorData();
     }, [symbol]);
 
-    checkAndFormatInvalidDate();
+    if (coindar && date.includes("Q") === false) {
+        checkAndFormatInvalidDate();
+    }
 
     return (
         <Grid item xs={10} md={5.5} lg={3.5} xl={2.5} justifySelf={"center"}>
@@ -189,16 +196,42 @@ const SmallEventCard = (props) => {
                 <CardContent>
                     {date ? (
                         <div>
-                            <Typography variant="h6" color="text.primary">
-                                <Moment format="D MMMM" withTitle>
-                                    {date}
-                                </Moment>
-                                {latest && " (or earlier)"}
-                            </Typography>
+                            {coindar && date.includes("Q") ? (
+                                <div>
+                                    <Typography
+                                        variant="h6"
+                                        color="text.primary"
+                                    >
+                                        {date}
+                                    </Typography>
 
-                            <Typography variant="h6" color="text.primary">
-                                {caption}
-                            </Typography>
+                                    <Typography
+                                        variant="h6"
+                                        color="text.primary"
+                                    >
+                                        {caption}
+                                    </Typography>
+                                </div>
+                            ) : (
+                                <div>
+                                    <Typography
+                                        variant="h6"
+                                        color="text.primary"
+                                    >
+                                        <Moment format="D MMMM" withTitle>
+                                            {date}
+                                        </Moment>
+                                        {latest && " (or earlier)"}
+                                    </Typography>
+
+                                    <Typography
+                                        variant="h6"
+                                        color="text.primary"
+                                    >
+                                        {caption}
+                                    </Typography>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <Typography variant="h6" color="text.primary">
