@@ -37,11 +37,7 @@ function App() {
                     >
                         <Switch>
                             <Route exact path="/" component={HomePage} />
-                            <Route
-                                exact
-                                path="/exchanges"
-                                component={ExchangeList}
-                            />
+                            <Route path="/exchanges" component={ExchangeList} />
                             <Route
                                 path="/btc-treasury"
                                 component={BtcTreasury}

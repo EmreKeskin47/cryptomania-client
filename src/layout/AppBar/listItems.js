@@ -6,7 +6,6 @@ import ListSubheader from "@mui/material/ListSubheader";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Link from "@mui/material/Link";
 import { List } from "@mui/material";
-import Home from "@mui/icons-material/Home";
 import Coindar from "../../assets/icon/coindar.png";
 import Coingecko from "../../assets/icon/coingecko.png";
 import CoinmarketCap from "../../assets/icon/coinmarketcap.png";
@@ -17,20 +16,22 @@ import FearGreed from "../../assets/icon/fearGreed.png";
 import Binance from "../../assets/icon/binance-drawer-icon.png";
 import WhaleAlert from "../../assets/icon/whale-alert-icon.png";
 import Cryptogram from "../../assets/small-icon.png";
+import CryptogramHome from "../../assets/Cryptogram.png";
 
 export const mainListItems = (
     <List sx={{ marginBottom: 8 }}>
         <Link href="/" underline="none" color="text.primary">
             <ListItem>
-                <ListItemIcon>
-                    <Home
-                        sx={{
-                            width: "35px",
-                            height: "40px",
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
+                <img
+                    src={CryptogramHome}
+                    style={{
+                        width: "55px",
+                        height: "45px",
+                        marginLeft: "-10px",
+                    }}
+                    alt="Cryptogram"
+                />
+                <ListItemText sx={{ marginLeft: "10px" }} primary="Home " />
             </ListItem>
         </Link>
         <Link href="/exchanges" underline="none" color="text.primary">

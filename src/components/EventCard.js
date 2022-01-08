@@ -23,6 +23,7 @@ const style = {
     transform: "translate(-50%, -50%)",
     width: "60%",
     height: "60%",
+    minHeight: "500px",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -30,7 +31,7 @@ const style = {
 };
 
 const SmallEventCard = (props) => {
-    const {
+    var {
         symbol,
         latest,
         name,
@@ -45,10 +46,48 @@ const SmallEventCard = (props) => {
         dateAdded,
         priceChange,
     } = props;
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [rsi, setRsi] = useState([]);
+
+    function isValidDate(d) {
+        return d instanceof Date && !isNaN(d);
+    }
+
+    const checkAndFormatInvalidDate = () => {
+        if (date && !isValidDate(date)) {
+            let dateString = date.toString();
+            let year = dateString.substring(0, 4);
+            let month = "0" + dateString.substring(5, 7);
+            let day = dateString.substring(7, 9);
+            let tempDate = year + "-" + month + day;
+            let dateTest = new Date(tempDate);
+
+            if (isValidDate(dateTest)) {
+                date = tempDate;
+            }
+        }
+
+        if (dateAdded && !isValidDate(dateAdded)) {
+            let dateAddedString = dateAdded.toString();
+            let year = dateAddedString.substring(0, 4);
+            let month = dateAddedString.substring(5, 7);
+            if (month.includes("-")) {
+                month = "0" + month;
+            }
+            let day = dateAddedString.substring(7, 9);
+            if (day.includes("-")) {
+                day = "0" + day;
+            }
+            let tempDate = year + "-" + month + day;
+            let dateTest = new Date(tempDate);
+            if (isValidDate(dateTest)) {
+                dateAdded = tempDate;
+            }
+        }
+    };
 
     useEffect(() => {
         async function getIndicatorData() {
@@ -59,6 +98,8 @@ const SmallEventCard = (props) => {
         }
         getIndicatorData();
     }, [symbol]);
+
+    checkAndFormatInvalidDate();
 
     return (
         <Grid item xs={10} md={5.5} lg={3.5} xl={2.5} justifySelf={"center"}>

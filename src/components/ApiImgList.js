@@ -115,7 +115,7 @@ const images = [
 
 const ApiImgList = () => {
     return (
-        <Container component="section" sx={{ mt: 8, mb: 4 }}>
+        <Container component="section" sx={{ mt: 16, mb: 8 }}>
             <Typography
                 variant="h6"
                 marked="center"

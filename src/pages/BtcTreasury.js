@@ -83,8 +83,8 @@ const BtcTreasury = () => {
                                 color="text.secondary"
                                 sx={{ flex: 1 }}
                             >
-                                {"updated on"}
-                                <Moment format="MM/YYYY">{today}</Moment>
+                                {"updated on "}
+                                <Moment format="MMMM YYYY">{today}</Moment>
                             </Typography>
                         </Paper>
                         <Paper
@@ -119,8 +119,8 @@ const BtcTreasury = () => {
                                 color="text.secondary"
                                 sx={{ flex: 1 }}
                             >
-                                {"updated on"}
-                                <Moment format="MM/YYYY">{today}</Moment>
+                                {"updated on "}
+                                <Moment format="MMMM YYYY">{today}</Moment>
                             </Typography>
                         </Paper>
                     </Grid>

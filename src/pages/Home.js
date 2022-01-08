@@ -106,7 +106,7 @@ const HomePage = () => {
                 {/* Hero unit */}
                 <Container
                     disableGutters
-                    maxWidth="sm"
+                    maxWidth="xs"
                     component="main"
                     sx={{ pb: 6 }}
                 >
@@ -125,16 +125,20 @@ const HomePage = () => {
                         color="text.secondary"
                         component="p"
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                        Cryptogram contains all reliable cryptocurrency events
+                        from various sources, general market overview and whale
+                        transactions to help crypto traders make better
+                        decisions.
                     </Typography>
                 </Container>
                 {/* End hero unit */}
                 <Container maxWidth="md" component="main">
-                    <Grid container spacing={5} alignItems="flex-end">
+                    <Grid
+                        container
+                        spacing={5}
+                        alignItems="flex-end"
+                        marginBottom={3}
+                    >
                         {tiers.map((tier) => (
                             // Enterprise card is full width at sm breakpoint
                             <Grid
@@ -223,14 +227,13 @@ const HomePage = () => {
                 </Container>
                 <ApiImgList />
 
-                {/* Footer */}
                 <Container
                     maxWidth="md"
                     component="footer"
                     sx={{
                         borderTop: (theme) =>
                             `1px solid ${theme.palette.divider}`,
-                        mt: 8,
+                        mt: 12,
                         py: [3, 6],
                     }}
                 >
