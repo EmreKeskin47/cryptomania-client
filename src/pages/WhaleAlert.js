@@ -23,13 +23,18 @@ const WhaleAlertPage = () => {
     const [oldTransactions, setOldTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [oldCount, setOldCount] = useState(0);
-    const getTransactions = async () => {
-        const res = await getWhaleTransactions();
-        setOldCount(res.count);
-        setOldTransactions(res.transactions);
-    };
 
     useEffect(() => {
+        const getTransactions = async () => {
+            try {
+                const res = await getWhaleTransactions();
+                //console.log(res);
+                setOldCount(res.count);
+                setOldTransactions(res.transactions);
+            } catch (e) {
+                console.log("whale alert page error", e);
+            }
+        };
         getTransactions();
         setLoading(false);
     }, []);
@@ -94,14 +99,13 @@ const WhaleAlertPage = () => {
                 {oldTransactions &&
                     oldTransactions.map((transaction, id) => {
                         return (
-                            <Grid item xs={12} md={5.5} lg={3.8}>
+                            <Grid item xs={12} md={5.5} lg={3.8} key={id}>
                                 <Box
                                     sx={{
                                         p: 2,
                                         bgcolor: "background.default",
                                         width: "100%",
                                     }}
-                                    key={id}
                                 >
                                     <Item elevation={12}>
                                         <Grid container>

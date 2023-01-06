@@ -52,10 +52,6 @@ const SmallEventCard = (props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [rsi, setRsi] = useState([]);
-    console.log("-----------------------------");
-
-    console.log(date, "not valid içi");
-    console.log("-----------------------------");
 
     function isValidDate(d) {
         return d instanceof Date && !isNaN(d);

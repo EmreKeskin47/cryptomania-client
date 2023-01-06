@@ -64,12 +64,16 @@ const FearGreedPage = () => {
     const [lastMonth, setLastMonth] = useState();
 
     const getFearGreedData = async () => {
-        const data = await getFearGreed();
-        setDateUpdated(data.lastUpdate.humanDate);
-        setNow(data.fgi.now);
-        setPrev(data.fgi.previousClose);
-        setLastWeek(data.fgi.oneWeekAgo);
-        setLastMonth(data.fgi.oneMonthAgo);
+        try {
+            const data = await getFearGreed();
+            setDateUpdated(data.lastUpdated.humanDate);
+            setNow(data.fgi.now);
+            setPrev(data.fgi.previousClose);
+            setLastWeek(data.fgi.oneWeekAgo);
+            setLastMonth(data.fgi.oneMonthAgo);
+        } catch (e) {
+            console.log("fear greed data ", e);
+        }
     };
     useEffect(() => {
         getFearGreedData();
@@ -82,7 +86,7 @@ const FearGreedPage = () => {
                 h2={
                     "Last Update " +
                     dateUpdated.substring(0, 10) +
-                    "@FearGreedAPI"
+                    " @FearGreedAPI"
                 }
             ></Title>
 

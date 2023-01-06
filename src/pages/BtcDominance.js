@@ -51,43 +51,48 @@ export default function AppCurrentVisits() {
     const theme = useTheme();
 
     const getDomData = async () => {
-        const res = await getGlobalInfo();
-        setActiveCurrency(res.data.active_cryptocurrencies);
-        setActiveExchange(res.data.active_exchanges);
-        setCmcBtcDom(res.data.btc_dominance);
-        setCmcBtcDomChange(res.data.btc_dominance_24h_percentage_change);
-        let ethCap =
-            (res.data.quote.USD.total_market_cap * res.data.eth_dominance) /
-            100;
-        let btcCap =
-            (res.data.quote.USD.total_market_cap * res.data.btc_dominance) /
-            100;
-        setMarketCap(res.data.quote.USD.total_market_cap);
-        setEthCap(ethCap);
-        setBtcCap(btcCap);
-        setMarketChange(
-            res.data.quote.USD.total_market_cap_yesterday_percentage_change
-        );
-        let pieValues = [
-            btcCap,
-            ethCap,
-            res.data.stablecoin_market_cap,
-            res.data.defi_market_cap,
-        ];
-        let pieLabels = ["BTC", "ETH", "STABLE", "DEFI"];
-        setBtcChange(res.data.btc_dominance_24h_percentage_change);
-        setEthChange(res.data.eth_dominance_24h_percentage_change);
-        const data = await getBtcDominance();
-        let dom = Object.values(data.data.market_cap_percentage);
-        let top10 = Object.keys(data.data.market_cap_percentage);
-        setDomTop10(top10);
-        setDomLabel(pieLabels);
-        setDomValuePie(pieValues);
+        try {
+            const res = await getGlobalInfo();
+            //console.log(res);
+            setActiveCurrency(res.data.active_cryptocurrencies);
+            setActiveExchange(res.data.active_exchanges);
+            setCmcBtcDom(res.data.btc_dominance);
+            setCmcBtcDomChange(res.data.btc_dominance_24h_percentage_change);
+            let ethCap =
+                (res.data.quote.USD.total_market_cap * res.data.eth_dominance) /
+                100;
+            let btcCap =
+                (res.data.quote.USD.total_market_cap * res.data.btc_dominance) /
+                100;
+            setMarketCap(res.data.quote.USD.total_market_cap);
+            setEthCap(ethCap);
+            setBtcCap(btcCap);
+            setMarketChange(
+                res.data.quote.USD.total_market_cap_yesterday_percentage_change
+            );
+            let pieValues = [
+                btcCap,
+                ethCap,
+                res.data.stablecoin_market_cap,
+                res.data.defi_market_cap,
+            ];
+            let pieLabels = ["BTC", "ETH", "STABLE", "DEFI"];
+            setBtcChange(res.data.btc_dominance_24h_percentage_change);
+            setEthChange(res.data.eth_dominance_24h_percentage_change);
+            const data = await getBtcDominance();
+            let dom = Object.values(data.data.market_cap_percentage);
+            let top10 = Object.keys(data.data.market_cap_percentage);
+            setDomTop10(top10);
+            setDomLabel(pieLabels);
+            setDomValuePie(pieValues);
 
-        for (let i = 0; i < dom.length; i++) {
-            dom[i] = dom[i].toPrecision(3);
+            for (let i = 0; i < dom.length; i++) {
+                dom[i] = dom[i].toPrecision(3);
+            }
+            setDomValueBar(dom);
+        } catch (e) {
+            //console.log("market info fetch error ", e);
         }
-        setDomValueBar(dom);
     };
     useEffect(() => {
         getDomData();

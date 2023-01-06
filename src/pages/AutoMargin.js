@@ -11,18 +11,23 @@ const AutoMarginPage = () => {
     const [loading, setLoading] = useState(true);
 
     const getTransactions = async () => {
-        const recentRes = await getRecentWhaleTransactions();
-        let binanceArray = [];
-        for (let i = 0; i < recentRes.transactions.length; i++) {
-            if (
-                recentRes.transactions[i].from.owner === "binance" ||
-                recentRes.transactions[i].to.owner === "binance"
-            ) {
-                binanceArray.push(recentRes.transactions[i]);
+        try {
+            const recentRes = await getRecentWhaleTransactions();
+            //console.log(recentRes);
+            let binanceArray = [];
+            for (let i = 0; i < recentRes.transactions.length; i++) {
+                if (
+                    recentRes.transactions[i].from.owner === "binance" ||
+                    recentRes.transactions[i].to.owner === "binance"
+                ) {
+                    binanceArray.push(recentRes.transactions[i]);
+                }
             }
+            setNewTransactions(binanceArray);
+            setNewCount(binanceArray.length);
+        } catch (e) {
+            console.log("get whale transaction e ", e);
         }
-        setNewTransactions(binanceArray);
-        setNewCount(binanceArray.length);
     };
 
     useEffect(() => {

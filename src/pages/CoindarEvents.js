@@ -17,10 +17,14 @@ const CoindarEvents = () => {
 
     useEffect(() => {
         async function getNewsData(page, sort) {
-            const res1 = await getNewsCoindar(page, sort);
-            const res2 = await getNewsCoindar(page + 1, sort);
+            try {
+                const res1 = await getNewsCoindar(page, sort);
+                const res2 = await getNewsCoindar(page + 1, sort);
 
-            setNewsList(res1.concat(res2));
+                setNewsList(res1.concat(res2));
+            } catch (e) {
+                console.log("get coindar events", e);
+            }
         }
         getNewsData(1, "date_start");
 
