@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getRecentWhaleTransactions } from "../api/WhaleAlert";
+import { getWhaleTransactions } from "../api/WhaleAlert";
 import Title from "../components/Title";
 import LoadingIndicator from "../components/Loading";
 import TransactionChart from "../components/TransactionChart";
@@ -12,17 +12,18 @@ const AutoMarginPage = () => {
 
     const getTransactions = async () => {
         try {
-            const recentRes = await getRecentWhaleTransactions();
+            const recentRes = await getWhaleTransactions();
             //console.log(recentRes);
             let binanceArray = [];
             for (let i = 0; i < recentRes.transactions.length; i++) {
                 if (
-                    recentRes.transactions[i].from.owner === "binance" ||
-                    recentRes.transactions[i].to.owner === "binance"
+                    recentRes.transactions[i].from.owner === "Binance" ||
+                    recentRes.transactions[i].to.owner === "Binance"
                 ) {
                     binanceArray.push(recentRes.transactions[i]);
                 }
             }
+            console.log(binanceArray);
             setNewTransactions(binanceArray);
             setNewCount(binanceArray.length);
         } catch (e) {

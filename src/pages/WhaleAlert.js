@@ -28,7 +28,6 @@ const WhaleAlertPage = () => {
         const getTransactions = async () => {
             try {
                 const res = await getWhaleTransactions();
-                //console.log(res);
                 setOldCount(res.count);
                 setOldTransactions(res.transactions);
             } catch (e) {
@@ -91,7 +90,7 @@ const WhaleAlertPage = () => {
 
                 <Grid item xs={12}>
                     <Typography variant="h6" marginY={5}>
-                        Whale Transactions in last 1 hour over 50 Million (
+                        Whale Transactions in last 1 hour over 5 Million (
                         {oldCount})
                     </Typography>
                 </Grid>
