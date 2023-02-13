@@ -21,7 +21,9 @@ const CoindarEvents = () => {
                 const res1 = await getNewsCoindar(page, sort);
                 const res2 = await getNewsCoindar(page + 1, sort);
 
-                setNewsList(res1.concat(res2));
+                if (res2) {
+                    setNewsList(res1.concat(res2));
+                }
             } catch (e) {
                 console.log("get coindar events", e);
             }

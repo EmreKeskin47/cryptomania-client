@@ -11,11 +11,17 @@ const CoinMarketCalEventsPage = () => {
     const [newsList, setNewsList] = useState([]);
     const [filter, setFilter] = useState("binance");
 
-    const getNewsData = async () => {
-        const res = await getNewsCoinmarketCal();
-        setNewsList(res.body);
-    };
     useEffect(() => {
+        const getNewsData = async () => {
+            try {
+                const res = await getNewsCoinmarketCal();
+                setNewsList(res.body);
+                console.log(res.body);
+            } catch (e) {
+                console.log("getting marketcal events error ", e);
+            }
+        };
+
         getNewsData();
     }, []);
 
