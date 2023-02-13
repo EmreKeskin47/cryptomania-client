@@ -58,6 +58,7 @@ const CoinMarketCalEventsPage = () => {
                 </ToggleButtonGroup>
             </Grid>
             {newsList &&
+                newsList !== [] &&
                 newsList.map((coin, id) => {
                     if (getCoinDetailedInfo(coin.coins[0].symbol) !== null) {
                         const { img, gate, binance } = getCoinDetailedInfo(

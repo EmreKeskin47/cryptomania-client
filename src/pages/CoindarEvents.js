@@ -84,6 +84,7 @@ const CoindarEvents = () => {
                 </Grid>
 
                 {newsList &&
+                    newsList !== [] &&
                     coindarCoinList &&
                     newsList.map((coin, id) => {
                         if (getCoinDetailedInfo(coin.coin_id) !== null) {
